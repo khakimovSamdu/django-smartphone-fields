@@ -4,6 +4,6 @@ urlpatterns = [
     path('all/', get_all),
     path('id/<int:id>/', get_id),
     path('add/', get_add),
-    path('update/id/<int:id>', get_id_update),
-    path('delete/id/<int:id>/', get_id_delete)
+    path('update/<int:id>/', get_id_update),
+    path('delete/<int:id>/', get_id_delete)
 ]

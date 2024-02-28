@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Smartphone(models.Model):
-    name = models.CharField(max_length=36)
+    name = models.CharField(max_length=72)
     company = models.CharField(max_length=36)
     color = models.CharField(max_length=16)
     RAM = models.CharField(max_length=12)
@@ -14,6 +14,7 @@ class Smartphone(models.Model):
         return self.name + " " + " " + self.RAM + "/" + self.memory 
 
     def to_dict(self):
+        
         return {
             "id": self.id,
             "name": self.name,

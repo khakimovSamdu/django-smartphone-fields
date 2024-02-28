@@ -6,36 +6,15 @@ import json
 def get_all(request: HttpRequest):
     data = Smartphone.objects.all()
     ruyxat = []
-    i=1
     for item in data:
-        ls = {
-            "id": item.id,
-            "name": item.name,
-            "company": item.company,
-            "color": item.color,
-            "RAM": item.RAM,
-            "memory": item.memory,
-            "price": item.price,
-            "img_url": item.img_url
-        }
-        ruyxat.append({str(i):ls})
-        i+=1
-    return JsonResponse({'smartphones':ruyxat})
+        ruyxat.append(item.to_dict())
+    return JsonResponse(ruyxat, safe=False)
 
 def get_id(request: HttpRequest, id: int):
     
     try:
         data = Smartphone.objects.get(id=id)
-        ls = {
-            "name": data.name,
-            "company": data.company,
-            "color": data.color,
-            "RAM": data.RAM,
-            "memory": data.memory,
-            "price": data.price,
-            "img_url": data.img_url
-        }
-        return JsonResponse({id:ls})
+        return JsonResponse(data.to_dict())
     except:
         HttpResponse("Smartphone not found id")
 
@@ -65,20 +44,9 @@ def get_id_update(request: HttpRequest, id: int):
         )
         data = Smartphone.objects.all()
         ruyxat = []
-        i=1
         for item in data:
-            ls = {
-                "name": item.name,
-                "company": item.company,
-                "color": item.color,
-                "RAM": item.RAM,
-                "memory": item.memory,
-                "price": item.price,
-                "img_url": item.img_url
-            }
-            ruyxat.append({str(i):ls})
-            i+=1
-        return JsonResponse({'smartphones':ruyxat})
+            ruyxat.append(item.to_dict())
+        return JsonResponse(ruyxat, safe=False)
     except:
         return HttpResponse("ID error")
 
@@ -87,20 +55,9 @@ def get_id_delete(request: HttpRequest, id: id):
         f = Smartphone.objects.filter(id=id).delete()
         data = Smartphone.objects.all()
         ruyxat = []
-        i=1
         for item in data:
-            ls = {
-                "name": item.name,
-                "company": item.company,
-                "color": item.color,
-                "RAM": item.RAM,
-                "memory": item.memory,
-                "price": item.price,
-                "img_url": item.img_url
-            }
-            ruyxat.append({str(i):ls})
-            i+=1
-        return JsonResponse({'smartphones':ruyxat})
+            ruyxat.append(item.to_dict())
+        return JsonResponse(ruyxat, safe=False)
     except:
         return HttpResponse("ID error")
 
